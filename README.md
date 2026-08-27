@@ -8,7 +8,7 @@ Quizz/
 │   ├── main.ts
 │   │
 │   ├── styles/
-│   │   └── style.css
+│   │   └── input.css
 │   │
 │   └── components/
 │       ├── navbar.ts
@@ -36,5 +36,9 @@ Class name -> "pascal case" example: KnowledgeTransfer
 - always merge code by creating a pull request
 - avoid direct push on main branch
 
-
 # Setup / Bootstrap
+- ✅ Bundler 
+- ✅ Github Setup + Branch Protection Rule
+- ✅ Tailwind Css Setup
+- ✅ Typescript Setup
+- ❌ Auto restart dev server
