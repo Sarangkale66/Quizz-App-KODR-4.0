@@ -32,5 +32,9 @@ Class name -> "pascal case" example: KnowledgeTransfer
 - if you implemented a new feature then start writing your commit message with feat:<describe_feature>
 - if you fix something inside a code base then start writing you commit message with fix:<describe_fix>
 
+# Github Pull Request
+- always merge code by creating a pull request
+- avoid direct push on main branch
+
 
 # Setup / Bootstrap
