@@ -1,0 +1,29 @@
+{
+  "name": "quizz-app",
+  "version": "1.0.0",
+  "description": "Basic Quizz App",
+  "homepage": "https://github.com/Sarangkale66/Quizz-App-KODR-4.0#readme",
+  "bugs": {
+    "url": "https://github.com/Sarangkale66/Quizz-App-KODR-4.0/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sarangkale66/Quizz-App-KODR-4.0.git"
+  },
+  "license": "ISC",
+  "author": "sarang kale",
+  "type": "module",
+  "main": "main.js",
+  "scripts": {
+    "dev": "npx tsc && npx serve",
+    "css:watch":"npx @tailwindcss/cli -i ./src/style/input.css -o ./dist/style/output.css --watch"
+  },
+  "devDependencies": {
+    "serve": "^14.2.6",
+    "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "tailwindcss": "^4.3.3"
+  }
+}
