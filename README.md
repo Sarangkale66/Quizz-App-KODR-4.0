@@ -41,4 +41,25 @@ Class name -> "pascal case" example: KnowledgeTransfer
 - ✅ Github Setup + Branch Protection Rule
 - ✅ Tailwind Css Setup
 - ✅ Typescript Setup
-- ❌ Auto restart dev server
+- ✅ Auto restart dev server
+
+# Dev Server - 
+- browser-sync
+- concurrently: 1 process(mulitple command execute karne ki permission deta hai)
+  - tailwind css
+  - tsc
+  - serve
+- esbuild (extermly faster)
+
+```
+"scripts": {
+    "dev:ts": "esbuild src/main.ts --bundle --outfile=dist/main.js --format=esm --sourcemap --watch",
+    "dev:typecheck": "tsc --noEmit --watch --preserveWatchOutput",
+    "dev:css": "npx @tailwindcss/cli -i ./src/style/input.css -o ./dist/style/output.css --watch",
+    "dev:serve": "browser-sync start --server --single --files \"dist/**/*.js,dist/**/*.css,index.html\" --no-notify --port 3000",
+    "dev": "concurrently \"npm run dev:ts\" \"npm run dev:typecheck\" \"npm run dev:css\" \"npm run dev:serve\" --names \"ESB,TSC,CSS,BS \" --prefix-colors \"cyan,blue,green,yellow\"",
+    "build": "tsc --noEmit && esbuild src/main.ts --bundle --outfile=dist/main.js --format=esm --minify && npx @tailwindcss/cli -i ./src/style/input.css -o ./dist/style/output.css"
+}
+```
+
+# Singleton Design Pattern
