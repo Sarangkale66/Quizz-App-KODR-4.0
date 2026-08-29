@@ -15,10 +15,17 @@
   "type": "module",
   "main": "main.js",
   "scripts": {
-    "dev": "npx tsc && npx serve",
-    "css:watch":"npx @tailwindcss/cli -i ./src/style/input.css -o ./dist/style/output.css --watch"
+    "dev:ts": "esbuild src/main.ts --bundle --outfile=dist/main.js --format=esm --sourcemap --watch",
+    "dev:typecheck": "tsc --noEmit --watch --preserveWatchOutput",
+    "dev:css": "npx @tailwindcss/cli -i ./src/style/input.css -o ./dist/style/output.css --watch",
+    "dev:serve": "browser-sync start --server --single --files \"dist/**/*.js,dist/**/*.css,index.html\" --no-notify --port 3000",
+    "dev": "concurrently \"npm run dev:ts\" \"npm run dev:typecheck\" \"npm run dev:css\" \"npm run dev:serve\" --names \"ESB,TSC,CSS,BS \" --prefix-colors \"cyan,blue,green,yellow\"",
+    "build": "tsc --noEmit && esbuild src/main.ts --bundle --outfile=dist/main.js --format=esm --minify && npx @tailwindcss/cli -i ./src/style/input.css -o ./dist/style/output.css"
   },
   "devDependencies": {
+    "browser-sync": "^3.0.4",
+    "concurrently": "^10.0.5",
+    "esbuild": "^0.28.2",
     "serve": "^14.2.6",
     "typescript": "^7.0.2"
   },
