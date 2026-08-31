@@ -1,23 +1,20 @@
-// singleton pattern (web-socket:wss, STUN server)
+import { HomePage } from "./page/HomePage.js";
 
-class Router {
-    private static _route:Router|null;
-    public name:string;
-    private constructor () {
-        this.name = "";
-    }
+const root = document.getElementById("root") as HTMLElement;
 
-    static getInstance() {
-        if(!this._route) {
-            this._route = new Router();
-        }
-        return this._route;
-    }
+console.log(root);
+
+if(!root) {
+    throw new Error("Root not exist")
 }
 
+function init() {
+    const homePage = new HomePage();
+    homePage.mount(root);
+}
 
-const router1 = Router.getInstance(); // router 1
-router1.name = "sarang"
+init();
 
-const router2 = Router.getInstance(); // router 1
-console.log(router2.name)
+// useState
+// useEffect
+// react-router (assignment)
