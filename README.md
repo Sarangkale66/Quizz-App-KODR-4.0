@@ -63,3 +63,10 @@ Class name -> "pascal case" example: KnowledgeTransfer
 ```
 
 # Singleton Design Pattern
+- state management ke liye use karnege
+
+# DOM --> Tree (DSA)
+- HTML Tag ko render kar sakte hoo (mount)
+- kisi bhi render kare hue element ko remove kar sakte ho (unmount)
+
+
