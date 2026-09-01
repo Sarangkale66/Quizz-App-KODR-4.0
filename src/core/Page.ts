@@ -1,7 +1,10 @@
 import { Component } from "./Component.js";
 
 export abstract class Page extends Component{
-    protected _childCompoent: Component[] = [];
-
-    abstract registerComponent(): Component[];
+    override onMount(): void {
+        this.onPageReady()
+    }
+    override onUnMount(): void {
+    }
+    onPageReady():void {}
 }
