@@ -1,12 +1,13 @@
 import { Page } from "../core/Page.js";
+import { useState } from "../core/useState.js";
 
 export class HomePage extends Page{
-    private _count:number=0;
+    private _count = useState(0, this);
 
     render(): string {
         return `
         <div>
-           <h1>${this._count}</h1>
+           <h1>${this._count.get()}</h1>
            <button id="btn" class="px-5 py-3 bg-blue-200 border-border cursor-pointer">Click Me!!!</button>
         </div>
         `;
@@ -24,15 +25,8 @@ export class HomePage extends Page{
     override onPageReady():void {
         const btn = document.querySelector("#btn") as HTMLButtonElement | null;
         if(btn) {
-            const parent = this._element?.parentElement;
-            if(!parent) {
-                throw new Error("Parent Doesn't exists")
-            }
-
             btn.addEventListener("click",()=> {
-                this.unmount();
-                this._count += 1;
-                this.mount(parent);
+                this._count.set((prev)=>prev+1);
             })
         }
     }

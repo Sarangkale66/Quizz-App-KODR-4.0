@@ -18,6 +18,17 @@ export abstract class Component {
        }
        this.onMount();
     }
+
+    rerender() {
+        if(!this._element) return;
+        this.onUnMount();
+        const newEl = this._createElement(); 
+        if(newEl !==null) {
+            this._element.replaceWith(newEl);
+            this._element = newEl;
+        }
+        this.onMount();
+    }
     
     // element ko remove karna
     unmount() {
