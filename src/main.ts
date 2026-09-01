@@ -10,11 +10,16 @@ if(!root) {
 
 function init() {
     const homePage = new HomePage();
-    homePage.mount(root);
+    homePage.mount(root); // <HomePage/>
+    // homePage.mount(root); // <HomePage/>
+    // homePage.mount(root); // <HomePage/>
+    // homePage.mount(root); // <HomePage/>
+    // homePage.mount(root); // <HomePage/>
 }
 
 init();
 
+// reusbale components kaise banarte hai
 // useState
 // useEffect
 // react-router (assignment)
