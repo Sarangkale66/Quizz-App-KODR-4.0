@@ -3,7 +3,15 @@
 import { Component } from "./Component.js";
 
 export abstract class Page extends Component {
-   onPageReady () {
 
+   onMount(): void {
+      this.onPageReady();
+   }
+
+   onUnmount(): void {
+   }
+
+   onPageReady () {
+      // iss function me sirf js likhi jayegi
    }
 }

@@ -16,24 +16,38 @@
 // db.unMount();
 
 export abstract class Component {
-    private _element: HTMLElement | null = null;
+    protected _element: HTMLElement | null = null;
     private _customCss: HTMLStyleElement | null =null;
 
     abstract render():string;
     abstract style():string;
 
-    mount(parent: HTMLElement) {
+    mount(parent: HTMLElement, flag:boolean = true) {
         this._injectStyle();
         const el = this._createElement();
         if(el!==null){
             parent.appendChild(el);
             this._element = el;
         }
+        if(flag) this.onMount();
+    }
+
+    hydrate(element: HTMLElement, flag:boolean = true) {
+        this._injectStyle();
+        this._element = element;
+        if(flag) this.onMount();
     }
 
     unMount() { 
+        this.onUnmount();
         this._element?.remove();
         this._element = null;
+    }
+
+    onMount() {
+    }
+    
+    onUnmount() {
     }
 
     private _createElement(): HTMLElement | null { // bussiness
@@ -42,7 +56,7 @@ export abstract class Component {
         return (tl.content.firstChild) as (HTMLElement | null) ;
     }
 
-    private _injectStyle():void {
+    protected _injectStyle():void {
         const css = this.style().trim(); // css
         if(!css) return;
         const key = this.constructor.name;
@@ -53,3 +67,5 @@ export abstract class Component {
         document.head.appendChild(this._customCss);
     }
 }
+
+// resuable components and props

@@ -1,4 +1,4 @@
-import { HomePage } from "./component/HomePage.js";
+import { HomePage } from "./page/HomePage.js";
 
 const root = document.querySelector("#root") as HTMLDivElement;
 
@@ -7,11 +7,7 @@ if(!root) {
 }
 
 function init() {
-    const hp = new HomePage()
-    console.log(hp.constructor.name);
-    hp.mount(root);
-    hp.mount(root);
-    hp.mount(root);
+    const hp = new HomePage();
     hp.mount(root);
 }
 
