@@ -22,7 +22,7 @@ export abstract class Component {
     abstract render():string;
     abstract style():string;
 
-    mount(parent: HTMLElement, flag:boolean = true) {
+    mount(parent: HTMLElement, flag:boolean = true):void {
         this._injectStyle();
         const el = this._createElement();
         if(el!==null){
@@ -32,10 +32,15 @@ export abstract class Component {
         if(flag) this.onMount();
     }
 
-    hydrate(element: HTMLElement, flag:boolean = true) {
-        this._injectStyle();
-        this._element = element;
-        if(flag) this.onMount();
+    rerender(): void {
+        if(this._element === null) return;
+        this.onUnmount();
+        const newEl = this._createElement();
+        if(newEl!==null) {
+            this._element?.replaceWith(newEl);
+            this._element = newEl;
+        }
+        this.onMount();
     }
 
     unMount() { 
@@ -68,4 +73,16 @@ export abstract class Component {
     }
 }
 
-// resuable components and props
+// ✅ resuable components and props
+// ✅ Custom Events
+//   parent --(HomePage.jsx)
+//    |
+//    | props
+//    |
+//   child --(Button.jsx)
+
+
+
+
+
+// Map

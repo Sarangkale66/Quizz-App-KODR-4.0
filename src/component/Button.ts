@@ -24,4 +24,20 @@ export class Button extends Component {
           }
         `
     }
+
+    onMount(): void {
+        // this._element --> null;
+        this._element = document.querySelector("#btn");
+        const btn = this._element;
+        btn?.addEventListener("click", ()=>{
+            // custom event
+            btn.dispatchEvent(new CustomEvent("btn-clicked", {
+                bubbles: true, 
+                detail: {
+                    value: true,
+                    count: this.props.count
+                }
+            }))
+        })
+    }
 }
