@@ -1,23 +1,22 @@
 import { Button } from "../component/Button.js";
 import { Page } from "../core/Page.js"
-import { useState } from "../core/useState.js";
 
 export class HomePage extends Page {
-  private hook = useState(0, this);
   private _flag: boolean = false;
-  private _button: Button = new Button({
-    count: this.hook.get()
-  });
+  private _button: Button[] = [
+    new Button({ id: "A" }),
+    new Button({ id: "B" }),
+    new Button({ id: "C" }),
+    new Button({ id: "D" }),
+    new Button({ id: "E" }),
+  ];
 
   render(): string {
-      this._button.props = {
-        count: this.hook.get()
-      };
       return `
       <div class=${this._flag ? "bgm-red" : "bgm-blue"}>
          <h1 class="head">Hello World</h1>
          <h2 class="head">Thik hai karliya</h2>
-         ${this._button.render()}
+         ${this._button.map((btn)=> btn.render()).join("")}
       </div>
        `;
   }
@@ -39,7 +38,7 @@ export class HomePage extends Page {
   }
 
   override onPageReady(): void {  
-    this._button.onMount();
+    this._button.forEach((btn)=> btn.onMount());
 
     this._element?.addEventListener("btn-clicked", (e)=>{
         console.log((e as CustomEvent).detail)
@@ -51,7 +50,6 @@ export class HomePage extends Page {
       if(!parent) {
         throw new Error("parent doesn't exists");
       }
-      this.hook.set(this.hook.get() + 1);
       this._flag = !this._flag;
     });
   }

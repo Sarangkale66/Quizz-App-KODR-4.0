@@ -1,10 +1,12 @@
 import { Component } from "../core/Component.js";
+import { useState } from "../core/useState.js";
 
 interface IButton {
-    count: number;
+    id: string;
 }
 
 export class Button extends Component {
+    private count = useState(0, this);
     public props: IButton;
     constructor(props: IButton){
         super();
@@ -12,12 +14,12 @@ export class Button extends Component {
     }
     render() {
       this._injectStyle();
-      return `<button id="btn">Click Me!!!:${this.props.count}</button>`
+      return `<button class="btn" data-id=${this.props.id}>Click Me!!!:${this.count.value}</button>`
     }
     
     style(): string {
         return `
-          #btn {
+          .btn {
              padding: 3px 5px;
              border: 1px solid black;
              background-color:red;
@@ -27,17 +29,10 @@ export class Button extends Component {
 
     onMount(): void {
         // this._element --> null;
-        this._element = document.querySelector("#btn");
+        this._element = document.querySelector(`button[data-id=${this.props.id}`);
         const btn = this._element;
         btn?.addEventListener("click", ()=>{
-            // custom event
-            btn.dispatchEvent(new CustomEvent("btn-clicked", {
-                bubbles: true, 
-                detail: {
-                    value: true,
-                    count: this.props.count
-                }
-            }))
+            this.count.set(this.count.value + 1);
         })
     }
 }

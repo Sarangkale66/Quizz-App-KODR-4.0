@@ -10,21 +10,37 @@
 
 import { Component } from "./Component.js";
 
+type StateGetter<T> = ()=> T
+type StateSetter<T> = (newVal:T) => void
+type StateHook<T> = [StateGetter<T>, StateSetter<T>] & {
+    value: T
+    get: StateGetter<T>,
+    set: StateSetter<T> 
+}
+
 // T --> number
-export function useState<T>(initialValue:T, component:Component){
+export function useState<T>(initialValue:T, component:Component): StateHook<T>{
     const owner = component;
     let outerValue = initialValue;
-    const getter = () => {
+    const getter: StateGetter<T> = () => {
         return outerValue;
     }
     // count+1
-    const setter = (newVal: T) => {
+    const setter: StateSetter<T> = (newVal: T) => {
         outerValue = newVal;
         owner.rerender();
     }
 
-    const hook:any = [getter, setter];
+    const hook = [getter, setter] as StateHook<T>;
     hook.get = getter;
     hook.set = setter;
+    
+    // readonly
+    Object.defineProperty(hook, "value", {
+        get: getter,
+        enumerable: true,
+        configurable: true
+    })
+
     return hook;
 }
