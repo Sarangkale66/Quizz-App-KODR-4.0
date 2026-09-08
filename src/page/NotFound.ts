@@ -1,17 +1,20 @@
 import { Button } from "../component/Button.js";
 import { Page } from "../core/Page.js"
 
-export class HomePage extends Page {
+export class NotFound extends Page {
   private _button: Button = new Button({ id: "A", name: "Start Quizz" });
 
   render(): string {
       this._injectStyle(); // CSS header me inject ho rahi
-      this._button.props.routeName = "MCQPage";
+      const buttonProps = this._button.props;
+      buttonProps.name = "Redirect To HomePage";
+      buttonProps.routeName = "HomePage";
       return `
-      <div>
-        ${this._button.render()}
-      </div>
-       `;
+        <div>
+           <h1 class="text-bold">Not Found</h1>
+           <h2 class="underline">404</h2>
+           ${this._button.render()}
+        </div>`;
   }
 
   style(): string {

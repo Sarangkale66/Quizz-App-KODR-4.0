@@ -1,4 +1,4 @@
-import { HomePage } from "./page/HomePage.js";
+import { AppLayout } from "./layout/App.layout.js";
 
 const root = document.querySelector("#root") as HTMLDivElement;
 
@@ -7,8 +7,8 @@ if(!root) {
 }
 
 function init() {
-    const hp = new HomePage();
-    hp.mount(root);
+    const appLayout = new AppLayout();
+    appLayout.mount(root);
 }
 
 init();

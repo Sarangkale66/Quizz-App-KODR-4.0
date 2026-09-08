@@ -1,12 +1,12 @@
 import { Component } from "../core/Component.js";
-import { useState } from "../core/useState.js";
 
 interface IButton {
     id: string;
+    name: string;
+    routeName?: string;
 }
 
 export class Button extends Component {
-    private count = useState(0, this);
     public props: IButton;
     constructor(props: IButton){
         super();
@@ -14,7 +14,8 @@ export class Button extends Component {
     }
     render() {
       this._injectStyle();
-      return `<button class="btn" data-id=${this.props.id}>Click Me!!!:${this.count.value}</button>`
+      const props = this.props;
+      return `<button class="btn" data-id=${props.id}>${props.name}</button>`
     }
     
     style(): string {
@@ -22,7 +23,10 @@ export class Button extends Component {
           .btn {
              padding: 3px 5px;
              border: 1px solid black;
-             background-color:red;
+             color: white;
+             background: linear-gradient(90deg, #4847d4 0%, #7f28cf 100%);
+             border-radius: 1.5vh;
+             cursor:pointer;
           }
         `
     }
@@ -31,8 +35,18 @@ export class Button extends Component {
         // this._element --> null;
         this._element = document.querySelector(`button[data-id=${this.props.id}`);
         const btn = this._element;
-        btn?.addEventListener("click", ()=>{
-            this.count.set(this.count.value + 1);
-        })
+
+        if(this.props.routeName) {
+            btn?.addEventListener("click", ()=>{
+                console.log("button clicked")
+                btn.dispatchEvent(new CustomEvent("route", {
+                    bubbles: true,
+                    composed: true,
+                    detail : {
+                        routeName: this.props.routeName
+                    }
+                }));
+            })
+        }
     }
 }
