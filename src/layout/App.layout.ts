@@ -8,7 +8,7 @@ import { NotFound } from "../page/NotFound.js";
 type RouteType =  "HomePage" | "MCQPage" | "ReviewPage" | "NotFound";
 
 export class AppLayout extends Page {
-    private _route = useState<RouteType>("HomePage", this); //by default
+    private _route = useState<RouteType>("MCQPage", this); //by default
     private _pages: Page[] = [new HomePage(), new MCQPage(), new ReviewPage(), new NotFound()];
 
     render(): string {
